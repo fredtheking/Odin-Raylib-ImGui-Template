@@ -57,6 +57,72 @@ last_super_pressed := false
 
 raylib_key_map: map[rl.KeyboardKey]imgui.Key = {}
 
+
+begin :: proc(){
+    process_events()
+    new_frame()
+    imgui.NewFrame()
+}
+
+end :: proc(){
+    imgui.Render()
+    render_draw_data(imgui.GetDrawData())
+}
+
+image :: proc(texture: ^rl.Texture2D){
+    imgui.Image(cast(rawptr) cast(uintptr) texture, {f32(texture.width), f32(texture.height)})
+}
+
+image_size :: proc(texture: ^rl.Texture2D, size: imgui.Vec2){
+    imgui.Image(cast(rawptr) cast(uintptr) texture, size)
+}
+
+image_rect :: proc(texture: ^rl.Texture2D, dest: imgui.Vec2, source: rl.Rectangle){
+    uv0 := imgui.Vec2{}
+    uv1 := imgui.Vec2{}
+
+    image_width := f32(texture.width)
+    image_height := f32(texture.height)
+
+    if source.width < 0 {
+        uv0.x = -(source.x / image_width)
+        uv1.x = uv0.x - abs(source.width) / image_width
+    } else {
+        uv0.x = source.x / image_width
+        uv1.x = uv0.x + source.width / image_width
+    }
+    if source.height < 0 {
+        uv0.y = -(source.y / image_height)
+        uv1.y = uv0.y - abs(source.height) / image_height
+    } else {
+        uv0.y = source.y / image_height
+        uv1.y = uv0.y + source.height / image_height
+    }
+    imgui.Image(cast(rawptr) cast(uintptr) texture, dest, uv0, uv1)
+}
+
+image_render_texture :: proc(render_texture: ^rl.RenderTexture2D){
+    size := imgui.Vec2{f32(render_texture.texture.width), f32(render_texture.texture.height)}
+    image_rect(&render_texture.texture, size, {0, 0, size.x, -size.y})
+}
+
+image_render_texture_fit :: proc(render_texture: ^rl.RenderTexture2D, center: bool = true){
+    size := imgui.Vec2{f32(render_texture.texture.width), f32(render_texture.texture.height)}
+    content_region_avail := imgui.GetContentRegionAvail()
+    num := content_region_avail.x / size.x
+    if (size.y * num) > content_region_avail.y do num = content_region_avail.y / size.y
+
+    dest := imgui.Vec2{size.x * num, size.y * num}
+    if center {
+        imgui.SetCursorPosX(0)
+        imgui.SetCursorPosX(content_region_avail.x / 2 - (dest.x / 2))
+        imgui.SetCursorPosY(imgui.GetCursorPosY() + (content_region_avail.y / 2 - (dest.y / 2)))
+    }
+    image_rect(&render_texture.texture, dest, {0, 0, size.x, size.y})
+}
+
+
+
 init :: proc() -> bool {
     setup_globals()
     setup_keymap()
@@ -99,17 +165,6 @@ shutdown :: proc() {
     }
 
     io.Fonts.TexID = nil
-}
-
-begin :: proc(){
-    process_events()
-    new_frame()
-    imgui.NewFrame()
-}
-
-end :: proc(){
-    imgui.Render()
-    render_draw_data(imgui.GetDrawData())
 }
 
 new_frame :: proc() {
