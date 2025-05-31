@@ -1,6 +1,6 @@
 # Шаблон Odin Raylib + ImGui
 
-Стартовый шаблон для проектов на [Odin](https://odin-lang.org/), с уже настроенными [raylib](https://www.raylib.com/) и [ImGui](https://github.com/ocornut/imgui) биндингами.
+Стартовый шаблон для проектов на [Odin](https://odin-lang.org/), с уже настроенными [Raylib](https://www.raylib.com/) и [Dear ImGui](https://github.com/ocornut/imgui) биндингами.
 
 Доступные языки:
 - [English/EN](README.md)
