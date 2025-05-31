@@ -1,6 +1,6 @@
 # Odin Raylib + ImGui Template
 
-A starter template for [Odin](https://odin-lang.org/) projects, pre-configured with [raylib](https://www.raylib.com/) and [ImGui](https://github.com/ocornut/imgui) bindings.
+A starter template for [Odin](https://odin-lang.org/) projects, pre-configured with [Raylib](https://www.raylib.com/) and [Dear ImGui](https://github.com/ocornut/imgui) bindings.
 
 Available languages:
 - [English/EN](README.md)
