@@ -10,4 +10,4 @@ if errorlevel 1 (
 )
 
 cd bin
-.\%project_name%
+.\%project_name%.exe
