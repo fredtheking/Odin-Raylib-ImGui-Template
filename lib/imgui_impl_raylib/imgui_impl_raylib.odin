@@ -410,7 +410,7 @@ setup_globals :: proc() {
     last_super_pressed = false
 }
 
-@(private)
+@private
 setup_gamepadmap :: proc() {
 	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_DOWN] = imgui.Key.GamepadFaceDown
 	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_LEFT] = imgui.Key.GamepadFaceLeft
