@@ -6,6 +6,9 @@ Available languages:
 - [English/EN](README.md)
 - [Русский/RU](README.ru.md)
 
+> [!WARNING]
+> At the moment, linux build is a bit [broken](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1).
+
 ## Features
 
 - Includes `imgui` + `imgui_impl_raylib`
