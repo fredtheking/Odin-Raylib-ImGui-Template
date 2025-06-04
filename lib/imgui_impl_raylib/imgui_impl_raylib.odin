@@ -129,6 +129,7 @@ image_render_texture_fit :: proc(render_texture: ^rl.RenderTexture2D, center: bo
 init :: proc() -> bool {
     setup_globals()
     setup_keymap()
+    setup_gamepadmap()
     setup_mouse_cursor()
     setup_backend()
 
