@@ -58,6 +58,8 @@ last_super_pressed := false
 raylib_key_map: map[rl.KeyboardKey]imgui.Key = {}
 raylib_gamepad_map: map[rl.GamepadButton]imgui.Key = {}
 
+max_gamepads: c.int = 4 // Maximum number of gamepads supported by raylib
+
 
 begin :: proc(){
     process_events()
@@ -388,7 +390,7 @@ process_events :: proc() -> bool {
 	}
 	// Check for released gamepad buttons
 	for gamepad_key, gamepad_value in raylib_gamepad_map {
-		for i in 0 ..= 3 {
+		for i in 0 ..< max_gamepads {
 			if rl.IsGamepadButtonReleased(i32(i), gamepad_key) {
 				imgui.IO_AddKeyEvent(io, gamepad_value, false)
 			}
