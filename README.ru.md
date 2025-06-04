@@ -6,6 +6,9 @@
 - [English/EN](README.md)
 - [Русский/RU](README.ru.md)
 
+> [!WARNING]
+> На данный момент, линукс версия немного [поломана](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1).
+
 ## Особенности
 
 - Подключён `imgui` + `imgui_impl_raylib`
