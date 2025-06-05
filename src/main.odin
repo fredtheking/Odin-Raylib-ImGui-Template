@@ -10,8 +10,7 @@ import imgui "../lib/odin-imgui"
 
 main :: proc() {
     rl.SetConfigFlags({ rl.ConfigFlag.WINDOW_RESIZABLE, rl.ConfigFlag.WINDOW_ALWAYS_RUN })
-    rl.InitWindow(800, 600, "Raylib + ImGui in Odin")
-    defer rl.CloseWindow()
+    rl.InitWindow(800, 600, "Raylib + ImGui in Odin"); defer rl.CloseWindow()
 
     // Setup ImGui context
     imgui.CreateContext(nil); defer imgui.DestroyContext(nil)
@@ -32,7 +31,7 @@ main :: proc() {
         rlimgui.begin()
 
         // Raylib rendering
-        rl.DrawText("Objects underneath ImGui window", 150, 300, 30, rl.RED)
+        rl.DrawText("Drawing underneath ImGui window", 150, 300, 30, rl.RED)
 
         // ImGui buffering
         imgui.ShowDemoWindow(nil)
@@ -41,7 +40,7 @@ main :: proc() {
         rlimgui.end()
 
         // Drawing on top of ImGui (call after 'rlimgui.end()' to do that, as showed here)
-        rl.DrawText("Objects on top of ImGui window", 170, 370, 30, rl.BLUE)
+        rl.DrawText("Drawing on top of ImGui window", 170, 370, 30, rl.BLUE)
         rl.EndDrawing()
     }
 }
