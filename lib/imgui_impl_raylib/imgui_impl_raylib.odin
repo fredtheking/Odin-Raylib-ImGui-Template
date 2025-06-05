@@ -56,6 +56,9 @@ last_alt_pressed := false
 last_super_pressed := false
 
 raylib_key_map: map[rl.KeyboardKey]imgui.Key = {}
+raylib_gamepad_map: map[rl.GamepadButton]imgui.Key = {}
+
+max_gamepads: c.int = 4 // Maximum number of gamepads supported by raylib
 
 
 begin :: proc(){
@@ -126,6 +129,7 @@ image_render_texture_fit :: proc(render_texture: ^rl.RenderTexture2D, center: bo
 init :: proc() -> bool {
     setup_globals()
     setup_keymap()
+    setup_gamepadmap()
     setup_mouse_cursor()
     setup_backend()
 
@@ -377,6 +381,23 @@ process_events :: proc() -> bool {
         pressed = rl.GetCharPressed()
     }
 
+    // Gamepad button events
+	last_gamepad_button: rl.GamepadButton = rl.GetGamepadButtonPressed()
+	if last_gamepad_button != rl.GamepadButton.UNKNOWN {
+		gamepad_key, ok := raylib_gamepad_map[last_gamepad_button]
+		if ok {
+			imgui.IO_AddKeyEvent(io, gamepad_key, true)
+		}
+	}
+	// Check for released gamepad buttons
+	for gamepad_key, gamepad_value in raylib_gamepad_map {
+		for i in 0 ..< max_gamepads {
+			if rl.IsGamepadButtonReleased(i32(i), gamepad_key) {
+				imgui.IO_AddKeyEvent(io, gamepad_value, false)
+			}
+		}
+	}
+
     return true
 }
 
@@ -387,6 +408,27 @@ setup_globals :: proc() {
     last_shift_pressed = false
     last_alt_pressed = false
     last_super_pressed = false
+}
+
+@private
+setup_gamepadmap :: proc() {
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_DOWN] = imgui.Key.GamepadFaceDown
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_LEFT] = imgui.Key.GamepadFaceLeft
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_RIGHT] = imgui.Key.GamepadFaceRight
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_FACE_UP] = imgui.Key.GamepadFaceUp
+	raylib_gamepad_map[rl.GamepadButton.LEFT_FACE_DOWN] = imgui.Key.GamepadDpadDown
+	raylib_gamepad_map[rl.GamepadButton.LEFT_FACE_LEFT] = imgui.Key.GamepadDpadLeft
+	raylib_gamepad_map[rl.GamepadButton.LEFT_FACE_RIGHT] = imgui.Key.GamepadDpadRight
+	raylib_gamepad_map[rl.GamepadButton.LEFT_FACE_UP] = imgui.Key.GamepadDpadUp
+	raylib_gamepad_map[rl.GamepadButton.LEFT_TRIGGER_1] = imgui.Key.GamepadL1
+	raylib_gamepad_map[rl.GamepadButton.LEFT_TRIGGER_2] = imgui.Key.GamepadL2
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_TRIGGER_1] = imgui.Key.GamepadR1
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_TRIGGER_2] = imgui.Key.GamepadR2
+	raylib_gamepad_map[rl.GamepadButton.LEFT_THUMB] = imgui.Key.GamepadL3
+	raylib_gamepad_map[rl.GamepadButton.RIGHT_THUMB] = imgui.Key.GamepadR3
+	raylib_gamepad_map[rl.GamepadButton.MIDDLE_RIGHT] = imgui.Key.GamepadStart
+	raylib_gamepad_map[rl.GamepadButton.MIDDLE_LEFT] = imgui.Key.GamepadBack
+	raylib_gamepad_map[rl.GamepadButton.UNKNOWN] = imgui.Key.None
 }
 
 @private
