@@ -15,7 +15,7 @@ main :: proc() {
     // Setup ImGui context
     imgui.CreateContext(nil); defer imgui.DestroyContext(nil)
 
-    // Init ImGui for Raylib AND build font
+    // Init ImGui for Raylib
     rlimgui.init(); defer rlimgui.shutdown()
 
     // Main loop
