@@ -132,6 +132,7 @@ init :: proc() -> bool {
     setup_gamepadmap()
     setup_mouse_cursor()
     setup_backend()
+    build_font_atlas()
 
     return true
 }

@@ -17,7 +17,6 @@ main :: proc() {
 
     // Init ImGui for Raylib AND build font
     rlimgui.init(); defer rlimgui.shutdown()
-    rlimgui.build_font_atlas()
 
     // Main loop
     for !rl.WindowShouldClose() {
