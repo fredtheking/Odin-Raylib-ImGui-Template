@@ -25,7 +25,7 @@
 ```cpp
 ./build.bat
 ```
-На Linux:
+На Linux/Macos:
 ```bash
 ./build.sh
 ```
