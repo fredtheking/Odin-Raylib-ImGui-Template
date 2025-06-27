@@ -7,7 +7,7 @@ Available languages:
 - [Русский/RU](README.ru.md)
 
 > [!WARNING]
-> At the moment, linux build is a bit [broken](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1).
+> At the moment, template is a bit [broken](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1) on some devices.
 
 ## Features
 
