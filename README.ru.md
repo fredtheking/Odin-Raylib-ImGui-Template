@@ -7,7 +7,7 @@
 - [Русский/RU](README.ru.md)
 
 > [!WARNING]
-> На данный момент, линукс версия немного [поломана](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1).
+> На данный момент, шаблон работает немного [некорректно](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1) на некоторых устройствах.
 
 ## Особенности
 
