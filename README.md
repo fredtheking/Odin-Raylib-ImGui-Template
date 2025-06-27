@@ -25,7 +25,7 @@ On Windows:
 ```cpp
 ./build.bat
 ```
-On Linux:
+On Linux/Macos:
 ```bash
 ./build.sh
 ```
