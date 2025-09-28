@@ -6,9 +6,6 @@ Available languages:
 - [English/EN](README.md)
 - [Русский/RU](README.ru.md)
 
-> [!WARNING]
-> At the moment, template is a bit [broken](https://github.com/fredtheking/Odin-Raylib-ImGui-Template/issues/1) on some devices.
-
 ## Features
 
 - Includes `imgui` + `imgui_impl_raylib`
