@@ -184,7 +184,7 @@ new_frame :: proc() {
         io.DisplaySize.y = f32(rl.GetScreenHeight())
     }
 
-    io.DisplayFramebufferScale = rl.GetWindowScaleDPI()
+    io.DisplayFramebufferScale = imgui.Vec2{1.0, 1.0}; 
     io.DeltaTime = rl.GetFrameTime()
 
     if io.WantSetMousePos {
